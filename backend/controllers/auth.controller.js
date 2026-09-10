@@ -1,6 +1,6 @@
 import { User } from "../models/User.model.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
-import { ApiError } from "../utils/apiError.js";
+import { ApiError } from "../utils/ApiError.js";
 import { generateToken } from "../utils/generateToken.js";
 
 const toclientUser = (user) => ({
