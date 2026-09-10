@@ -80,7 +80,7 @@ const buildPipelineStats = (leads) => {
   const closed = won + lost;
   return {
     totalLeads: leads.length,
-    totlaPipelineValue: totalValue,
+    totalPipelineValue: totalValue,
     winRate: closed ? Math.round((won / closed) * 100) : 0,
     stages: byStage,
   };
