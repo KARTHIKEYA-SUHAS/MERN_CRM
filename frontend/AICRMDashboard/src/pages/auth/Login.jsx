@@ -16,7 +16,7 @@ export default function Login() {
   const {
     register,
     handleSubmit,
-    // setValue,
+    setValue,
     formState: { errors },
   } = useForm({ defaultValues: { email: "", password: "" } });
 
@@ -33,11 +33,11 @@ export default function Login() {
     }
   };
 
-  // Convenience: pre-fill the seeded demo credentials.
-  // const useDemo = () => {
-  //   setValue("email", "alex@timetoprogram.com");
-  //   setValue("password", "Test@1234");
-  // };
+  //Convenience: pre-fill the seeded demo credentials.
+  const useDemo = () => {
+    setValue("email", "demo@test.in");
+    setValue("password", "Test@123");
+  };
 
   return (
     <AuthShell>
@@ -77,16 +77,19 @@ export default function Login() {
         </Button>
       </form>
 
-      {/* <button
+      <button
         onClick={useDemo}
         className="mt-3 w-full rounded-full border border-dashed border-brand-300 py-2.5 text-sm font-medium text-brand-700 transition hover:bg-brand-50"
       >
-        Try the demo account
-      </button> */}
+        Try Demo Account
+      </button>
 
       <p className="mt-6 text-center text-sm text-ink-soft">
         Don't have an account?{" "}
-        <Link to="/register" className="font-semibold text-brand-700 hover:underline">
+        <Link
+          to="/register"
+          className="font-semibold text-brand-700 hover:underline"
+        >
           Create one
         </Link>
       </p>
