@@ -941,7 +941,7 @@ function ContactFormDialog({ open, contact, onClose, onSaved }) {
         <Field label="Full name" error={errors.name?.message}>
           <Input
             {...register("name", { required: "Name is required" })}
-            placeholder="Jane Doe"
+            placeholder="Suhas K S"
             autoFocus
           />
         </Field>
@@ -962,14 +962,14 @@ function ContactFormDialog({ open, contact, onClose, onSaved }) {
             <Input
               {...register("email")}
               type="email"
-              placeholder="jane@acme.com"
+              placeholder="suhasks@crita.com"
             />
           </Field>
           <Field label="Phone">
             <Input
               {...register("phone")}
               type="tel"
-              placeholder="+1 555 000 0000"
+              placeholder="+91 86974 95863"
             />
           </Field>
         </div>

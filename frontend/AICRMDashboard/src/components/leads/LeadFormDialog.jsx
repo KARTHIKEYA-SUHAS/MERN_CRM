@@ -67,12 +67,12 @@ export function LeadFormDialog({ open, onClose, lead, onSaved }) {
             <Input placeholder="Company" {...register("company")} />
           </Field>
           <Field label="Email">
-            <Input type="email" placeholder="email@company.com" {...register("email")} />
+            <Input type="email" placeholder="Enter Lead's Mail ID" {...register("email")} />
           </Field>
           <Field label="Phone">
-            <Input placeholder="+1 555 0100" {...register("phone")} />
+            <Input placeholder="Enter Lead's Phone" {...register("phone")} />
           </Field>
-          <Field label="Deal value (USD)">
+          <Field label="Deal value (INR)">
             <Input type="number" min="0" placeholder="0" {...register("value")} />
           </Field>
           <Field label="Stage">
