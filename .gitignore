@@ -1,0 +1,6 @@
+/backend/.env
+/backend/node_modules
+
+/frontend/AICRMDashboard/.env
+/frontend/AICRMDashboard/.env.example
+/frontend/AICRMDashboard/node_modules
