@@ -1,6 +1,6 @@
 import { Lead } from "../models/Lead.model.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
-import { ApiError } from "../utils/apiError.js";
+import { ApiError } from "../utils/ApiError.js";
 
 export const getLeads = asyncHandler(async (req, res) => {
   const { status, priority, source, search } = req.query;
