@@ -14,12 +14,12 @@ export const getNotes = asyncHandler(async (req, res) => {
     .populate("lead", "name company")
     .populate("contact", "name company");
 
-  req.json({ success: true, count: notes.length, notes });
+  res.json({ success: true, count: notes.length, notes });
 });
 
 export const createNote = asyncHandler(async (req, res) => {
   const { content, lead, contact, pinned } = req.body;
-  if (!contact) throw new ApiError(400, "Note Content is Required");
+  if (!content?.trim()) throw new ApiError(400, "Note Content is Required");
 
   const note = await Note.create({
     owner: req.user._id,

@@ -33,7 +33,7 @@ export const updateTask = asyncHandler(async (req, res) => {
   }
 
   const task = await Task.findOneAndUpdate(
-    { id: req.params.id, owner: req.user._id },
+    { _id: req.params.id, owner: req.user._id },
     updates,
     { new: true, runValidators: true },
   );
@@ -43,7 +43,7 @@ export const updateTask = asyncHandler(async (req, res) => {
 
 export const deleteTask = asyncHandler(async (req, res) => {
   const task = await Task.findOneAndDelete({
-    id: req.params.id,
+    _id: req.params.id,
     owner: req.user._id,
   });
   if (!task) throw new ApiError(404, "Task not Found");
