@@ -192,8 +192,8 @@ export default function Dashboard() {
                   value={range}
                   onChange={setRange}
                   tabs={[
-                    { value: "monthly", label: "Monthly" },
-                    { value: "annually", label: "Annually" },
+                    { value: "monthly", label: "6-Months" },
+                    { value: "annually", label: "Annual" },
                   ]}
                 />
               }
