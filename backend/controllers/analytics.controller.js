@@ -33,7 +33,9 @@ export const getOverview = asyncHandler(async (req, res) => {
   const closed = won + lost;
   const conversionRate = closed ? Math.round((won / closed) * 100) : 0;
 
-  const months = lastSixMonths();
+  // const months = lastSixMonths();
+  const period = req.query.period || "monthly";
+  const months = getTrendMonths(period);
   const trend = months.map(({ key, label }) => ({
     month: label,
     leads: 0,
@@ -54,16 +56,14 @@ export const getOverview = asyncHandler(async (req, res) => {
   const recentLeads = [...leads]
     .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
     .slice(0, 6)
-    .map((l) =>
-      ({
-        id: l._id,
-        name: l.name,
-        company: l.company,
-        status: l.status,
-        value: l.value,
-        updatedAt: l.updatedAt,
-      }),
-    );
+    .map((l) => ({
+      id: l._id,
+      name: l.name,
+      company: l.company,
+      status: l.status,
+      value: l.value,
+      updatedAt: l.updatedAt,
+    }));
 
   res.json({
     success: true,
@@ -85,7 +85,34 @@ export const getOverview = asyncHandler(async (req, res) => {
   });
 });
 
-const lastSixMonths = () => {
+// const lastSixMonths = () => {
+//   const labels = [
+//     "Jan",
+//     "Feb",
+//     "Mar",
+//     "Apr",
+//     "May",
+//     "Jun",
+//     "Jul",
+//     "Aug",
+//     "Sep",
+//     "Oct",
+//     "Nov",
+//     "Dec",
+//   ];
+//   const now = new Date();
+//   const out = [];
+//   for (let i = 5; i >= 0; i--) {
+//     const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+//     out.push({
+//       key: `${d.getFullYear()}-${d.getMonth()}`,
+//       label: labels[d.getMonth()],
+//     });
+//   }
+//   return out;
+// };
+
+const getTrendMonths = (period) => {
   const labels = [
     "Jan",
     "Feb",
@@ -100,14 +127,29 @@ const lastSixMonths = () => {
     "Nov",
     "Dec",
   ];
+
   const now = new Date();
-  const out = [];
-  for (let i = 5; i >= 0; i--) {
-    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
-    out.push({
-      key: `${d.getFullYear()}-${d.getMonth()}`,
-      label: labels[d.getMonth()],
+  const currentYear = now.getFullYear();
+
+  // Annual → January to December of current year
+  if (period === "annually") {
+    return Array.from({ length: 12 }, (_, index) => {
+      const date = new Date(currentYear, index, 1);
+
+      return {
+        key: `${date.getFullYear()}-${date.getMonth()}`,
+        label: labels[date.getMonth()],
+      };
     });
   }
-  return out;
+
+  // Monthly → last 6 months
+  return Array.from({ length: 6 }, (_, index) => {
+    const date = new Date(currentYear, now.getMonth() - 5 + index, 1);
+
+    return {
+      key: `${date.getFullYear()}-${date.getMonth()}`,
+      label: labels[date.getMonth()],
+    };
+  });
 };

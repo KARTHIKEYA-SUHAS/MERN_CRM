@@ -33,7 +33,7 @@ export const updateLead = asyncHandler(async (req, res) => {
   const { owner, ...updates } = req.body;
 
   const lead = await Lead.findOneAndUpdate(
-    { _id: req.params.id, owner: req.users._id },
+    { _id: req.params.id, owner: req.user._id },
     updates,
     { new: true, runValidators: true },
   );

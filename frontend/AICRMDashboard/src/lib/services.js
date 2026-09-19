@@ -66,5 +66,6 @@ export const aiApi = {
 /* ── Analytics (computed from the in-memory leads, so the dashboard always
       matches the Leads/Pipeline pages) ──────────────────────────────────── */
 export const analyticsApi = {
-  overview: () => api.get("/analytics/overview"),
+  overview: (period = "monthly") =>
+    api.get(`/analytics/overview?period=${period}`),
 };
